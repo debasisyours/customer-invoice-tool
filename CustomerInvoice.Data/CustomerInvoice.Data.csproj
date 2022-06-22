@@ -1,0 +1,205 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{E23A340D-DFBE-49D0-874D-62737C94288A}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>CustomerInvoice.Data</RootNamespace>
+    <AssemblyName>CustomerInvoice.Data</AssemblyName>
+    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.configuration" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Data.Linq" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="DataLayer.cs" />
+    <Compile Include="DataSets\AmalgamatedDataSet.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>AmalgamatedDataSet.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="DataSets\AmalgamatedInvoiceDetailDataSet.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="DataSets\AmalgamatedPrintDataSet.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="DataSets\AmalgamatedPrintDetailDataSet.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="DataSets\BreakDownDataSet.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="DataSets\BreakdownDetailDataSet.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="DataSets\ChargeDataSet.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="DataSets\ClientDataSet.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="DataSets\CompanyDataSet.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="DataSets\CreditNoteDataSet.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="DataSets\CreditNotePrintDataSet.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="DataSets\CustomerBreakDownDataSet.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="DataSets\CustomerDataSet.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="DataSets\InvoiceBreakDownDataSet.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="DataSets\InvoiceCsvDataSet.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="DataSets\InvoiceDataSet.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="DataSets\InvoiceDetailDataSet.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="DataSets\InvoiceHistoryDataSet.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="DataSets\InvoicePrintDataSet.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="DataSets\SalesInvoiceDataSet.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="DataSets\UserDataSet.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Helpers\AdminHelper.cs" />
+    <Compile Include="Helpers\ChargeHelper.cs" />
+    <Compile Include="Helpers\ClientHelper.cs" />
+    <Compile Include="Helpers\CreditNoteHelper.cs" />
+    <Compile Include="Helpers\CustomerHelper.cs" />
+    <Compile Include="Helpers\DatabaseHelper.cs" />
+    <Compile Include="Helpers\InvoiceHelper.cs" />
+    <Compile Include="Helpers\SettingsHelper.cs" />
+    <Compile Include="InvoiceContext.cs">
+      <DependentUpon>InvoiceContext.dbml</DependentUpon>
+    </Compile>
+    <Compile Include="InvoiceContext.designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>InvoiceContext.dbml</DependentUpon>
+    </Compile>
+    <Compile Include="Models\CustomerFeeModel.cs" />
+    <Compile Include="Models\InvoiceExportModel.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+      <DependentUpon>Settings.settings</DependentUpon>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="app.config" />
+    <None Include="DataSets\AmalgamatedDataSet.xsc">
+      <DependentUpon>AmalgamatedDataSet.xsd</DependentUpon>
+    </None>
+    <None Include="DataSets\AmalgamatedDataSet.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>AmalgamatedDataSet.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="DataSets\AmalgamatedDataSet.xss">
+      <DependentUpon>AmalgamatedDataSet.xsd</DependentUpon>
+    </None>
+    <None Include="InvoiceContext.dbml">
+      <Generator>MSLinqToSQLGenerator</Generator>
+      <LastGenOutput>InvoiceContext.designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Properties\DataSources\CustomerInvoice.Data.DataSets.CreditNotePrintDataSet.datasource" />
+    <None Include="Properties\DataSources\CustomerInvoice.Data.DataSets.InvoiceBreakDownDataSet.datasource" />
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{3259AA49-8AA1-44D3-9025-A0B520596A8C}" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="InvoiceContext.dbml.layout">
+      <DependentUpon>InvoiceContext.dbml</DependentUpon>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\CustomerInvoice.Common\CustomerInvoice.Common.csproj">
+      <Project>{866e4631-37d1-4b04-9e86-b2a479ef1c39}</Project>
+      <Name>CustomerInvoice.Common</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\AlterTable.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\ResetInvoiceScript.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\usp_Invoice_History.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\usp_CheckClientRip.sql" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

@@ -1,0 +1,219 @@
+﻿<?xml version="1.0" encoding="utf-8"?><Database Name="CustomerInvoice" Class="InvoiceContextDataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
+  <Connection Mode="AppSettings" ConnectionString="Data Source=ADMIN-PC\SQL2014;Initial Catalog=CustomerInvoice;User ID=sa" SettingsObjectName="CustomerInvoice.Data.Properties.Settings" SettingsPropertyName="CustomerInvoiceConnectionString1" Provider="System.Data.SqlClient" />
+  <Table Name="dbo.Customer" Member="Customers">
+    <Type Name="Customer">
+      <Column Name="ID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="Code" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="Name" Type="System.String" DbType="VarChar(100) NOT NULL" CanBeNull="false" />
+      <Column Name="Address" Type="System.String" DbType="VarChar(1000)" CanBeNull="true" />
+      <Column Name="Email" Type="System.String" DbType="VarChar(200)" CanBeNull="true" />
+      <Column Name="IsFamily" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="ShowName" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="Exported" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="Changed" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="SageReference" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="Phone" Type="System.String" CanBeNull="false" />
+      <Column Name="CompanyId" Type="System.Int32" CanBeNull="false" />
+      <Column Name="IsDeleted" Type="System.Boolean" CanBeNull="false" />
+      <Column Name="PhysicalPrintRequired" Type="System.Boolean" CanBeNull="false" />
+      <Association Name="Customer_BreakDownDetail" Member="BreakDownDetails" ThisKey="ID" OtherKey="CustomerID" Type="BreakDownDetail" />
+      <Association Name="Customer_InvoiceDetail" Member="InvoiceDetails" ThisKey="ID" OtherKey="CustomerID" Type="InvoiceDetail" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Client" Member="Clients">
+    <Type Name="Client">
+      <Column Name="ID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="Code" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="Name" Type="System.String" DbType="VarChar(100)" CanBeNull="true" />
+      <Column Name="DateOfBirth" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="DateOfAdmission" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="TotalRate" Type="System.Decimal" DbType="Money NOT NULL" CanBeNull="false" />
+      <Column Name="SageReference" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="TheirReference" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="CompanyId" Type="System.Int32" CanBeNull="false" />
+      <Column Name="Narrative" Type="System.String" CanBeNull="false" />
+      <Column Name="IsDeleted" Type="System.Boolean" CanBeNull="false" />
+      <Column Name="Rip" Type="System.DateTime" CanBeNull="true" />
+      <Association Name="Client_BreakDown" Member="BreakDowns" ThisKey="ID" OtherKey="ClientID" Type="BreakDown" />
+      <Association Name="Client_Invoice" Member="Invoices" ThisKey="ID" OtherKey="ClientID" Type="Invoice" />
+      <Association Name="Client_CreditNote" Member="CreditNotes" ThisKey="ID" OtherKey="ClientId" Type="CreditNote" />
+    </Type>
+  </Table>
+  <Table Name="dbo.GlobalSettings" Member="GlobalSettings">
+    <Type Name="GlobalSetting">
+      <Column Name="InvoiceExportPath" Type="System.String" DbType="VarChar(500)" IsPrimaryKey="true" CanBeNull="true" />
+      <Column Name="CustomerExportPath" Type="System.String" DbType="VarChar(500)" IsPrimaryKey="true" CanBeNull="true" />
+      <Column Name="PdfExportPath" Type="System.String" DbType="VarChar(500)" IsPrimaryKey="true" CanBeNull="true" />
+      <Column Name="CompanyName" Type="System.String" CanBeNull="false" />
+      <Column Name="CompanyAddress" Type="System.String" CanBeNull="false" />
+      <Column Name="AccountName" Type="System.String" CanBeNull="false" />
+      <Column Name="AccountNumber" Type="System.String" CanBeNull="false" />
+      <Column Name="SortCode" Type="System.String" CanBeNull="false" />
+      <Column Name="SmtpFromAddress" Type="System.String" CanBeNull="false" />
+      <Column Name="SmtpUser" Type="System.String" CanBeNull="false" />
+      <Column Name="SmtpPassword" Type="System.String" CanBeNull="false" />
+      <Column Name="CompanyId" Type="System.Int32" CanBeNull="false" />
+      <Column Name="LetterContent" Type="System.String" CanBeNull="true"/>
+    </Type>
+  </Table>
+  <Table Name="dbo.ChargeHead" Member="ChargeHeads">
+    <Type Name="ChargeHead">
+      <Column Name="ID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="Name" Type="System.String" DbType="VarChar(100) NOT NULL" CanBeNull="false" />
+      <Column Name="CompanyId" Type="System.Int32" CanBeNull="false" />
+      <Association Name="ChargeHead_BreakDownDetail" Member="BreakDownDetails" ThisKey="ID" OtherKey="ChargeHeadID" Type="BreakDownDetail" />
+      <Association Name="ChargeHead_InvoiceDetail" Member="InvoiceDetails" ThisKey="ID" OtherKey="ChargeHeadID" Type="InvoiceDetail" />
+    </Type>
+  </Table>
+  <Table Name="dbo.BreakDown" Member="BreakDowns">
+    <Type Name="BreakDown">
+      <Column Name="ID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="ClientID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="DateCreated" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="CompanyId" Type="System.Int32" CanBeNull="false" />
+      <Association Name="BreakDown_BreakDownDetail" Member="BreakDownDetails" ThisKey="ID" OtherKey="BreakDownID" Type="BreakDownDetail" />
+      <Association Name="Client_BreakDown" Member="Client" ThisKey="ClientID" OtherKey="ID" Type="Client" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.BreakDownDetail" Member="BreakDownDetails">
+    <Type Name="BreakDownDetail">
+      <Column Name="ID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="BreakDownID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="CustomerID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="ChargeHeadID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="Rate" Type="System.Decimal" DbType="Money NOT NULL" CanBeNull="false" />
+      <Column Name="IsActive" Type="System.Boolean" DbType="Bit NULL" CanBeNull="true" />
+      <Column Name="InvoiceCycle" Type="System.Int16" DbType="TINYINT NULL" CanBeNull="true" />
+      <Association Name="Customer_BreakDownDetail" Member="Customer" ThisKey="CustomerID" OtherKey="ID" Type="Customer" IsForeignKey="true" />
+      <Association Name="ChargeHead_BreakDownDetail" Member="ChargeHead" ThisKey="ChargeHeadID" OtherKey="ID" Type="ChargeHead" IsForeignKey="true" />
+      <Association Name="BreakDown_BreakDownDetail" Member="BreakDown" ThisKey="BreakDownID" OtherKey="ID" Type="BreakDown" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Invoice" Member="Invoices">
+    <Type Name="Invoice">
+      <Column Name="ID" Type="System.Int64" DbType="BigInt NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="InvoiceNumber" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="InvoiceDate" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="ClientID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="NetAmount" Type="System.Decimal" DbType="Money NOT NULL" CanBeNull="false" />
+      <Column Name="CompanyId" Type="System.Int32" CanBeNull="false" />
+      <Column Name="Narration" Type="System.String" CanBeNull="false" />
+      <Column Name="StartDate" Type="System.DateTime" CanBeNull="false" />
+      <Column Name="EndDate" Type="System.DateTime" CanBeNull="false" />
+      <Column Name="Printed" Type="System.Boolean" CanBeNull="false" />
+      <Column Name="Deleted" Type="System.Boolean" CanBeNull="false" />
+      <Column Name="UserPrinted" Type="System.Boolean" CanBeNull="false" />
+      <Column Name="MultiMonth" Type="System.Boolean" CanBeNull="true"/>
+      <Association Name="Invoice_InvoiceDetail" Member="InvoiceDetails" ThisKey="ID" OtherKey="InvoiceID" Type="InvoiceDetail" />
+      <Association Name="Client_Invoice" Member="Client" ThisKey="ClientID" OtherKey="ID" Type="Client" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.InvoiceDetail" Member="InvoiceDetails">
+    <Type Name="InvoiceDetail">
+      <Column Name="ID" Type="System.Int64" DbType="BigInt NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="InvoiceID" Type="System.Int64" DbType="BigInt NOT NULL" CanBeNull="false" />
+      <Column Name="CustomerID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="ChargeHeadID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="WeeklyRate" Type="System.Decimal" DbType="Money NOT NULL" CanBeNull="false" />
+      <Column Name="Days" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="SubTotal" Type="System.Decimal" DbType="Money NOT NULL" CanBeNull="false" />
+      <Column Name="ExtraHead" Type="System.String" DbType="VarChar(100)" CanBeNull="true" />
+      <Column Name="ExtraAmount" Type="System.Decimal" DbType="Money NOT NULL" CanBeNull="false" />
+      <Column Name="LessHead" Type="System.String" DbType="VarChar(100)" CanBeNull="true" />
+      <Column Name="LessAmount" Type="System.Decimal" DbType="Money NOT NULL" CanBeNull="false" />
+      <Column Name="TotalAmount" Type="System.Decimal" DbType="Money NOT NULL" CanBeNull="false" />
+      <Association Name="Customer_InvoiceDetail" Member="Customer" ThisKey="CustomerID" OtherKey="ID" Type="Customer" IsForeignKey="true" />
+      <Association Name="ChargeHead_InvoiceDetail" Member="ChargeHead" ThisKey="ChargeHeadID" OtherKey="ID" Type="ChargeHead" IsForeignKey="true" />
+      <Association Name="Invoice_InvoiceDetail" Member="Invoice" ThisKey="InvoiceID" OtherKey="ID" Type="Invoice" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.CreditNote" Member="CreditNotes">
+    <Type Name="CreditNote">
+      <Column Name="ID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="ClientId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="TransactionNumber" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="TransactionDate" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="Description" Type="System.String" DbType="VarChar(500) NOT NULL" CanBeNull="false" />
+      <Column Name="Amount" Type="System.Decimal" DbType="Money NOT NULL" CanBeNull="false" />
+      <Column Name="CompanyId" Type="System.Int32" CanBeNull="false" />
+      <Column Name="Narration" Type="System.String" CanBeNull="false" />
+      <Column Name="Deleted" Type="System.Boolean" CanBeNull="false" />
+      <Column Name="CustomerId" Type="System.Int32" CanBeNull="false" />
+      <Column Name="Printed" Type="System.Boolean" CanBeNull="false" />
+      <Column Name="UserPrinted" Type="System.Boolean" CanBeNull="false" />
+      <Association Name="Client_CreditNote" Member="Client" ThisKey="ClientId" OtherKey="ID" Type="Client" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Company" Member="Companies">
+    <Type Name="Company">
+      <Column Name="ID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="Name" Type="System.String" DbType="VarChar(100) NOT NULL" CanBeNull="false" />
+      <Column Name="Code" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="Address" Type="System.String" DbType="VarChar(500)" CanBeNull="true" />
+      <Column Name="City" Type="System.String" DbType="VarChar(100)" CanBeNull="true" />
+      <Column Name="State" Type="System.String" DbType="VarChar(100)" CanBeNull="true" />
+      <Column Name="Country" Type="System.String" DbType="VarChar(100)" CanBeNull="true" />
+      <Column Name="ZIP" Type="System.String" DbType="VarChar(10)" CanBeNull="true" />
+      <Column Name="Phone" Type="System.String" DbType="VarChar(100)" CanBeNull="true" />
+      <Column Name="Fax" Type="System.String" DbType="VarChar(100)" CanBeNull="true" />
+      <Column Name="Email" Type="System.String" DbType="VarChar(100)" CanBeNull="true" />
+      <Column Name="URL" Type="System.String" DbType="VarChar(100)" CanBeNull="true" />
+      <Column Name="AccountCode" Type="System.String" CanBeNull="false" />
+      <Column Name="AccountNumber" Type="System.String" CanBeNull="false" />
+      <Association Name="Company_CompanyUser" Member="CompanyUsers" ThisKey="ID" OtherKey="CompanyId" Type="CompanyUser" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Users" Member="Users">
+    <Type Name="User">
+      <Column Name="ID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="Name" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="Password" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="IsActive" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Association Name="User_CompanyUser" Member="CompanyUsers" ThisKey="ID" OtherKey="UserId" Type="CompanyUser" />
+    </Type>
+  </Table>
+  <Table Name="dbo.CompanyUsers" Member="CompanyUsers">
+    <Type Name="CompanyUser">
+      <Column Name="ID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="UserId" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="CompanyId" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Association Name="Company_CompanyUser" Member="Company" ThisKey="CompanyId" OtherKey="ID" Type="Company" IsForeignKey="true" />
+      <Association Name="User_CompanyUser" Member="User" ThisKey="UserId" OtherKey="ID" Type="User" IsForeignKey="true" />
+    </Type>
+  </Table>
+	<Table Name="dbo.AmalgamatedInvoice" Member="AmalgamatedInvoices">
+	    <Type Name="AmalgamatedInvoice">
+		    <Column Name="ID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+		    <Column Name="InvoiceNumber" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+		    <Column Name="InvoiceDate" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+		    <Column Name="CustomerID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+		    <Column Name="NetAmount" Type="System.Decimal" DbType="Money NOT NULL" CanBeNull="false" />
+		    <Column Name="CompanyId" Type="System.Int32" CanBeNull="false" />
+		    <Column Name="Narration" Type="System.String" CanBeNull="false" />
+		    <Column Name="StartDate" Type="System.DateTime" CanBeNull="false" />
+		    <Column Name="EndDate" Type="System.DateTime" CanBeNull="false" />
+		    <Column Name="Printed" Type="System.Boolean" CanBeNull="false" />
+		    <Column Name="Deleted" Type="System.Boolean" CanBeNull="true" />
+		    <Column Name="UserPrinted" Type="System.Boolean" CanBeNull="true" />
+		    <Column Name="MultiMonth" Type="System.Boolean" CanBeNull="true"/>
+		    <Association Name="AmalgamatedInvoice_AmalgamatedInvoiceDetail" Member="AmalgamatedInvoiceDetails" ThisKey="ID" OtherKey="AmalgamatedInvoiceID" Type="AmalgamatedInvoiceDetail" />
+	    </Type>
+	</Table>
+	<Table Name="dbo.AmalgamatedInvoiceDetail" Member="AmalgamatedInvoiceDetails">
+		<Type Name="AmalgamatedInvoiceDetail">
+			<Column Name="ID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+			<Column Name="AmalgamatedInvoiceID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+			<Column Name="ClientID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+			<Column Name="ChargeHeadID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+			<Column Name="WeeklyRate" Type="System.Decimal" DbType="Money NOT NULL" CanBeNull="false" />
+			<Column Name="Days" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+			<Column Name="SubTotal" Type="System.Decimal" DbType="Money NOT NULL" CanBeNull="false" />
+			<Column Name="ExtraHead" Type="System.String" DbType="VarChar(100)" CanBeNull="true" />
+			<Column Name="ExtraAmount" Type="System.Decimal" DbType="Money NOT NULL" CanBeNull="false" />
+			<Column Name="LessHead" Type="System.String" DbType="VarChar(100)" CanBeNull="true" />
+			<Column Name="LessAmount" Type="System.Decimal" DbType="Money NOT NULL" CanBeNull="false" />
+			<Column Name="TotalAmount" Type="System.Decimal" DbType="Money NOT NULL" CanBeNull="false" />
+			<Association Name="AmalgamatedInvoice_AmalgamatedInvoiceDetail" Member="AmalgamatedInvoice" ThisKey="AmalgamatedInvoiceID" OtherKey="ID" Type="AmalgamatedInvoice" IsForeignKey="true" />
+		</Type>
+	</Table>
+</Database>

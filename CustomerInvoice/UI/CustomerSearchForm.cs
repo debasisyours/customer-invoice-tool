@@ -370,13 +370,14 @@ namespace CustomerInvoice.UI
         private void OnUpdateActiveFlag(object sender, EventArgs e)
         {
             bool success = false;
-            if (this._CustomerData.Tables[CustomerDataSet.TableCustomer].Rows.Count > 0)
+            if (this.dgvCustomers.RowCount > 0)
             {
-                foreach (DataRow customerRow in this._CustomerData.Tables[CustomerDataSet.TableCustomer].Rows)
+                DataLayer.MarkCustomerInactiveInAllBreakdowns(Program.LoggedInCompanyId);
+                foreach (DataGridViewRow row in this.dgvCustomers.Rows)
                 {
                     success =
-                        DataLayer.MarkCustomerActiveInBreakdown(Convert.ToInt32(customerRow[CustomerDataSet.IdColumn]),
-                            Convert.ToBoolean(customerRow[CustomerDataSet.SelectedColumn]));
+                        DataLayer.MarkCustomerActiveInBreakdown(Convert.ToInt32(row.Cells[CustomerDataSet.IdColumn].Value),
+                            Convert.ToBoolean(row.Cells[CustomerDataSet.SelectedColumn].Value));
                     if (!success) break;
                 }
             }

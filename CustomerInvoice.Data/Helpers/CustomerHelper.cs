@@ -357,6 +357,37 @@ namespace CustomerInvoice.Data.Helpers
             return success;
         }
 
+        protected internal bool MarkCustomerInactiveInAllBreakdown(int companyId)
+        {
+            bool success = false;
+
+            try
+            {
+                using (var context = new InvoiceContextDataContext(this._ConnectionString))
+                {
+                    List<BreakDown> breakdowns =
+                        context.BreakDowns.Where(s => s.CompanyId == companyId).ToList();
+
+                    foreach (var breakdownItem in breakdowns)
+                    {
+                        var detail = context.BreakDownDetails.Where(s => s.BreakDownID == breakdownItem.ID).ToList();
+                        detail.ForEach(s =>
+                        {
+                            s.IsActive = false;
+                        });
+                    }
+                    context.SubmitChanges();
+                    success = true;
+                }
+            }
+            catch (Exception ex)
+            {
+                Logger.WriteLog(ex);
+            }
+
+            return success;
+        }
+
         protected internal bool IsCustomerLinkedWithActiveClient(string customerEmail, int companyId)
         {
             bool linkedToActive = false;

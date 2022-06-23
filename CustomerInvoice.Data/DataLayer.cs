@@ -678,6 +678,14 @@ namespace CustomerInvoice.Data
             }
         }
 
+        public static bool MarkCustomerInactiveInAllBreakdowns(int companyId)
+        {
+            using (CustomerHelper helper = new CustomerHelper(GetConnectionString()))
+            {
+                return helper.MarkCustomerInactiveInAllBreakdown(companyId);
+            }
+        }
+
         public static List<Client> CheckClientWithRip(int companyId, DateTime invoiceDate)
         {
             using (InvoiceHelper helper = new InvoiceHelper(GetConnectionString()))

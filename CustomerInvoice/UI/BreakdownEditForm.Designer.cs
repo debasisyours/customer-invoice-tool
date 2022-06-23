@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             this.gbEdit = new System.Windows.Forms.GroupBox();
+            this.chkActive = new System.Windows.Forms.CheckBox();
             this.btnExcelExport = new System.Windows.Forms.Button();
             this.txtInvoiceCycle = new System.Windows.Forms.TextBox();
             this.label6 = new System.Windows.Forms.Label();
@@ -49,7 +50,8 @@
             this.txtTotal = new System.Windows.Forms.TextBox();
             this.label5 = new System.Windows.Forms.Label();
             this.lblTotalRecords = new System.Windows.Forms.Label();
-            this.chkActive = new System.Windows.Forms.CheckBox();
+            this.lblSearch = new System.Windows.Forms.Label();
+            this.txtSearch = new System.Windows.Forms.TextBox();
             this.gbEdit.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvEntry)).BeginInit();
             this.SuspendLayout();
@@ -80,6 +82,16 @@
             this.gbEdit.TabStop = false;
             this.gbEdit.Text = "Add / Edit Breakdown";
             // 
+            // chkActive
+            // 
+            this.chkActive.AutoSize = true;
+            this.chkActive.Location = new System.Drawing.Point(803, 119);
+            this.chkActive.Name = "chkActive";
+            this.chkActive.Size = new System.Drawing.Size(63, 20);
+            this.chkActive.TabIndex = 14;
+            this.chkActive.Text = "Active";
+            this.chkActive.UseVisualStyleBackColor = true;
+            // 
             // btnExcelExport
             // 
             this.btnExcelExport.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
@@ -95,7 +107,7 @@
             // 
             this.txtInvoiceCycle.Location = new System.Drawing.Point(555, 115);
             this.txtInvoiceCycle.Name = "txtInvoiceCycle";
-            this.txtInvoiceCycle.Size = new System.Drawing.Size(124, 26);
+            this.txtInvoiceCycle.Size = new System.Drawing.Size(124, 22);
             this.txtInvoiceCycle.TabIndex = 12;
             this.txtInvoiceCycle.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
@@ -104,7 +116,7 @@
             this.label6.AutoSize = true;
             this.label6.Location = new System.Drawing.Point(409, 118);
             this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(177, 20);
+            this.label6.Size = new System.Drawing.Size(139, 16);
             this.label6.TabIndex = 11;
             this.label6.Text = "Invoice cycle (months)";
             // 
@@ -143,9 +155,9 @@
             // 
             // txtAmount
             // 
-            this.txtAmount.Location = new System.Drawing.Point(150, 115);
+            this.txtAmount.Location = new System.Drawing.Point(166, 115);
             this.txtAmount.Name = "txtAmount";
-            this.txtAmount.Size = new System.Drawing.Size(218, 26);
+            this.txtAmount.Size = new System.Drawing.Size(202, 22);
             this.txtAmount.TabIndex = 7;
             this.txtAmount.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
@@ -154,7 +166,7 @@
             this.label4.AutoSize = true;
             this.label4.Location = new System.Drawing.Point(9, 118);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(66, 20);
+            this.label4.Size = new System.Drawing.Size(52, 16);
             this.label4.TabIndex = 6;
             this.label4.Text = "Amount";
             // 
@@ -164,9 +176,9 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.cboCharge.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cboCharge.FormattingEnabled = true;
-            this.cboCharge.Location = new System.Drawing.Point(150, 82);
+            this.cboCharge.Location = new System.Drawing.Point(166, 82);
             this.cboCharge.Name = "cboCharge";
-            this.cboCharge.Size = new System.Drawing.Size(1291, 28);
+            this.cboCharge.Size = new System.Drawing.Size(1275, 24);
             this.cboCharge.TabIndex = 5;
             // 
             // label3
@@ -174,7 +186,7 @@
             this.label3.AutoSize = true;
             this.label3.Location = new System.Drawing.Point(9, 86);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(156, 20);
+            this.label3.Size = new System.Drawing.Size(126, 16);
             this.label3.TabIndex = 4;
             this.label3.Text = "Select Charge head";
             // 
@@ -184,9 +196,9 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.cboCustomer.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cboCustomer.FormattingEnabled = true;
-            this.cboCustomer.Location = new System.Drawing.Point(150, 50);
+            this.cboCustomer.Location = new System.Drawing.Point(166, 50);
             this.cboCustomer.Name = "cboCustomer";
-            this.cboCustomer.Size = new System.Drawing.Size(1291, 28);
+            this.cboCustomer.Size = new System.Drawing.Size(1275, 24);
             this.cboCustomer.TabIndex = 3;
             // 
             // label2
@@ -194,7 +206,7 @@
             this.label2.AutoSize = true;
             this.label2.Location = new System.Drawing.Point(9, 54);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(134, 20);
+            this.label2.Size = new System.Drawing.Size(105, 16);
             this.label2.TabIndex = 2;
             this.label2.Text = "Select Customer";
             // 
@@ -204,9 +216,9 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.cboClient.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cboClient.FormattingEnabled = true;
-            this.cboClient.Location = new System.Drawing.Point(150, 19);
+            this.cboClient.Location = new System.Drawing.Point(166, 19);
             this.cboClient.Name = "cboClient";
-            this.cboClient.Size = new System.Drawing.Size(1291, 28);
+            this.cboClient.Size = new System.Drawing.Size(1275, 24);
             this.cboClient.TabIndex = 1;
             // 
             // label1
@@ -214,7 +226,7 @@
             this.label1.AutoSize = true;
             this.label1.Location = new System.Drawing.Point(9, 23);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(104, 20);
+            this.label1.Size = new System.Drawing.Size(81, 16);
             this.label1.TabIndex = 0;
             this.label1.Text = "Select Client";
             // 
@@ -224,10 +236,10 @@
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.dgvEntry.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgvEntry.Location = new System.Drawing.Point(7, 165);
+            this.dgvEntry.Location = new System.Drawing.Point(7, 208);
             this.dgvEntry.Name = "dgvEntry";
             this.dgvEntry.RowHeadersWidth = 51;
-            this.dgvEntry.Size = new System.Drawing.Size(1451, 456);
+            this.dgvEntry.Size = new System.Drawing.Size(1451, 413);
             this.dgvEntry.TabIndex = 1;
             // 
             // btnClose
@@ -261,7 +273,7 @@
             this.txtTotal.Location = new System.Drawing.Point(1240, 627);
             this.txtTotal.Name = "txtTotal";
             this.txtTotal.ReadOnly = true;
-            this.txtTotal.Size = new System.Drawing.Size(218, 26);
+            this.txtTotal.Size = new System.Drawing.Size(218, 22);
             this.txtTotal.TabIndex = 8;
             this.txtTotal.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
@@ -271,7 +283,7 @@
             this.label5.AutoSize = true;
             this.label5.Location = new System.Drawing.Point(1146, 630);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(108, 20);
+            this.label5.Size = new System.Drawing.Size(86, 16);
             this.label5.TabIndex = 9;
             this.label5.Text = "Total Amount";
             this.label5.TextAlign = System.Drawing.ContentAlignment.TopRight;
@@ -283,26 +295,36 @@
             this.lblTotalRecords.ForeColor = System.Drawing.Color.Maroon;
             this.lblTotalRecords.Location = new System.Drawing.Point(110, 674);
             this.lblTotalRecords.Name = "lblTotalRecords";
-            this.lblTotalRecords.Size = new System.Drawing.Size(108, 20);
+            this.lblTotalRecords.Size = new System.Drawing.Size(84, 16);
             this.lblTotalRecords.TabIndex = 10;
             this.lblTotalRecords.Text = "Total Clients:";
             // 
-            // chkActive
+            // lblSearch
             // 
-            this.chkActive.AutoSize = true;
-            this.chkActive.Location = new System.Drawing.Point(803, 119);
-            this.chkActive.Name = "chkActive";
-            this.chkActive.Size = new System.Drawing.Size(77, 24);
-            this.chkActive.TabIndex = 14;
-            this.chkActive.Text = "Active";
-            this.chkActive.UseVisualStyleBackColor = true;
+            this.lblSearch.AutoSize = true;
+            this.lblSearch.Location = new System.Drawing.Point(16, 173);
+            this.lblSearch.Name = "lblSearch";
+            this.lblSearch.Size = new System.Drawing.Size(68, 16);
+            this.lblSearch.TabIndex = 11;
+            this.lblSearch.Text = "Search on";
+            // 
+            // txtSearch
+            // 
+            this.txtSearch.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.txtSearch.Location = new System.Drawing.Point(173, 170);
+            this.txtSearch.Name = "txtSearch";
+            this.txtSearch.Size = new System.Drawing.Size(1282, 22);
+            this.txtSearch.TabIndex = 12;
             // 
             // BreakdownEditForm
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.CancelButton = this.btnClose;
             this.ClientSize = new System.Drawing.Size(1467, 697);
+            this.Controls.Add(this.txtSearch);
+            this.Controls.Add(this.lblSearch);
             this.Controls.Add(this.lblTotalRecords);
             this.Controls.Add(this.label5);
             this.Controls.Add(this.txtTotal);
@@ -346,5 +368,7 @@
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.Button btnExcelExport;
         private System.Windows.Forms.CheckBox chkActive;
+        private System.Windows.Forms.Label lblSearch;
+        private System.Windows.Forms.TextBox txtSearch;
     }
 }

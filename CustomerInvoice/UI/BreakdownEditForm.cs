@@ -59,6 +59,8 @@ namespace CustomerInvoice.UI
             this.btnCancel.Click += new EventHandler(OnCancel);
             this.btnDelete.Click += new EventHandler(OnDelete);
             this.dgvEntry.CellClick += new DataGridViewCellEventHandler(OnBreakdownSelect);
+            this.dgvEntry.ColumnHeaderMouseClick += new DataGridViewCellMouseEventHandler(OnGridHeaderSelect);
+            this.txtSearch.TextChanged += new EventHandler(OnSearchFilter);
             this.btnExport.Click += new EventHandler(OnExport);
             this.btnExcelExport.Click += new EventHandler(OnExportToExcel);
         }
@@ -384,6 +386,97 @@ namespace CustomerInvoice.UI
             this.txtInvoiceCycle.Text = invoiceCycle.ToString("N0");
             this.chkActive.Checked = isActive;
             this._SelectedId = Convert.ToInt32(selected.Cells[BreakDownDataSet.IdColumn].Value);
+        }
+
+        private void OnGridHeaderSelect(object sender, DataGridViewCellMouseEventArgs e)
+        {
+            switch (this.dgvEntry.Columns[e.ColumnIndex].Name)
+            {
+                case BreakDownDataSet.ClientNameColumn:
+                    {
+                        this.lblSearch.Text = "Search on client name";
+                        this.txtSearch.Focus();
+                        break;
+                    }
+                case BreakDownDataSet.CustomerNameColumn:
+                    {
+                        this.lblSearch.Text = "Search on customer name";
+                        this.txtSearch.Focus();
+                        break;
+                    }
+                case BreakDownDataSet.ChargeHeadNameColumn:
+                    {
+                        this.lblSearch.Text = "Search on charge head";
+                        this.txtSearch.Focus();
+                        break;
+                    }
+                case BreakDownDataSet.ClientCodeColumn:
+                    {
+                        this.lblSearch.Text = "Search on client code";
+                        this.txtSearch.Focus();
+                        break;
+                    }
+                case BreakDownDataSet.CustomerCodeColumn:
+                    {
+                        this.lblSearch.Text = "Search on customer code";
+                        this.txtSearch.Focus();
+                        break;
+                    }
+            }
+        }
+
+        private void OnSearchFilter(object sender, EventArgs e)
+        {
+            string filterExpression = string.Empty;
+            if (this.lblSearch.Text.Length > 9)
+            {
+                switch (this.lblSearch.Text.Substring(9).Trim())
+                {
+                    case "client name":
+                        {
+                            filterExpression = $"{BreakDownDataSet.ClientNameColumn} LIKE '%{this.txtSearch.Text}%'";
+                            break;
+                        }
+                    case "client code":
+                        {
+                            filterExpression = $"{BreakDownDataSet.ClientCodeColumn} LIKE '%{this.txtSearch.Text}%'";
+                            break;
+                        }
+                    case "customer name":
+                        {
+                            filterExpression = $"{BreakDownDataSet.CustomerNameColumn} LIKE '%{this.txtSearch.Text}%'";
+                            break;
+                        }
+                    case "customer code":
+                        {
+                            filterExpression = $"{BreakDownDataSet.CustomerCodeColumn} LIKE '%{this.txtSearch.Text}%'";
+                            break;
+                        }
+                    case "charge head":
+                        {
+                            filterExpression = $"{BreakDownDataSet.ChargeHeadNameColumn} LIKE '%{this.txtSearch.Text}%'";
+                            break;
+                        }
+                }
+
+                if (!string.IsNullOrWhiteSpace(filterExpression))
+                {
+                    DataRow[] rows = this._Breakdown.Tables[BreakDownDataSet.TableBreakDown].Select(filterExpression);
+                    if (rows.Length > 0)
+                    {
+                        BreakDownDataSet tempData = new BreakDownDataSet();
+                        foreach(DataRow rowItem in rows)
+                        {
+                            tempData.Tables[BreakDownDataSet.TableBreakDown].ImportRow(rowItem);
+                        }
+                        this.dgvEntry.DataSource = tempData.Tables[BreakDownDataSet.TableBreakDown];
+                        this.dgvEntry.Columns[BreakDownDataSet.IdColumn].Visible = false;
+                        this.dgvEntry.Columns[BreakDownDataSet.ClientIdColumn].Visible = false;
+                        this.dgvEntry.Columns[BreakDownDataSet.CustomerIdColumn].Visible = false;
+                        this.dgvEntry.Columns[BreakDownDataSet.ChargeHeadIdColumn].Visible = false;
+                    }
+                }
+            }
         }
 
         #endregion

@@ -461,6 +461,7 @@ namespace CustomerInvoice.UI
 
                 if (!string.IsNullOrWhiteSpace(filterExpression))
                 {
+                    decimal updatedTotal = 0;
                     DataRow[] rows = this._Breakdown.Tables[BreakDownDataSet.TableBreakDown].Select(filterExpression);
                     if (rows.Length > 0)
                     {
@@ -468,6 +469,7 @@ namespace CustomerInvoice.UI
                         foreach(DataRow rowItem in rows)
                         {
                             tempData.Tables[BreakDownDataSet.TableBreakDown].ImportRow(rowItem);
+                            updatedTotal += Convert.ToDecimal(rowItem[BreakDownDataSet.AmountColumn]);
                         }
                         this.dgvEntry.DataSource = tempData.Tables[BreakDownDataSet.TableBreakDown];
                         this.dgvEntry.Columns[BreakDownDataSet.IdColumn].Visible = false;
@@ -475,6 +477,7 @@ namespace CustomerInvoice.UI
                         this.dgvEntry.Columns[BreakDownDataSet.CustomerIdColumn].Visible = false;
                         this.dgvEntry.Columns[BreakDownDataSet.ChargeHeadIdColumn].Visible = false;
                     }
+                    this.txtTotal.Text = updatedTotal.ToString("N2");
                 }
             }
         }

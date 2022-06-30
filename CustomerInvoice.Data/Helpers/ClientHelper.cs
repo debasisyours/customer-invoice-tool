@@ -44,7 +44,7 @@ namespace CustomerInvoice.Data.Helpers
             {
                 using (InvoiceContextDataContext context = new InvoiceContextDataContext(this._ConnectionString))
                 {
-                    List<Client> clientList = context.Clients.Where(s => s.CompanyId==companyId && s.IsDeleted==false).ToList();
+                    List<Client> clientList = context.Clients.Where(s => s.CompanyId==companyId && !s.IsDeleted).ToList();
                     if (clientList != null && clientList.Count > 0)
                     {
                         foreach (Client clientEntry in clientList)
@@ -415,26 +415,29 @@ namespace CustomerInvoice.Data.Helpers
                     List<BreakDown> breakdownList = context.BreakDowns.Where(s => s.CompanyId == companyId).ToList();
                     foreach (BreakDown breakdownItem in breakdownList)
                     {
-                        tmpClient = context.Clients.Where(s => s.ID == breakdownItem.ClientID && s.IsDeleted==false).SingleOrDefault();
+                        tmpClient = context.Clients.Where(s => s.ID == breakdownItem.ClientID && s.Rip == null).SingleOrDefault();
                         detailList = context.BreakDownDetails.Where(s => s.BreakDownID == breakdownItem.ID).ToList();
-                        foreach (BreakDownDetail detailItem in detailList)
+                        if (tmpClient != null)
                         {
-                            tmpCustomer = context.Customers.Where(s => s.ID == detailItem.CustomerID).SingleOrDefault();
-                            tmpCharge = context.ChargeHeads.Where(s => s.ID == detailItem.ChargeHeadID).SingleOrDefault();
-                            row = breakdowns.Tables[BreakDownDataSet.TableBreakDown].NewRow();
-                            row[BreakDownDataSet.AmountColumn] = detailItem.Rate;
-                            row[BreakDownDataSet.ChargeHeadIdColumn] = tmpCharge.ID;
-                            row[BreakDownDataSet.ChargeHeadNameColumn] = tmpCharge.Name;
-                            row[BreakDownDataSet.ClientCodeColumn] = tmpClient.Code;
-                            row[BreakDownDataSet.ClientIdColumn] = tmpClient.ID;
-                            row[BreakDownDataSet.ClientNameColumn] = tmpClient.Name;
-                            row[BreakDownDataSet.CustomerCodeColumn] = tmpCustomer.Code;
-                            row[BreakDownDataSet.CustomerIdColumn] = tmpCustomer.ID;
-                            row[BreakDownDataSet.CustomerNameColumn] = tmpCustomer.Name;
-                            row[BreakDownDataSet.InvoiceCycleColumn] = detailItem.InvoiceCycle;
-                            row[BreakDownDataSet.IsActiveColumn] = detailItem.IsActive;
-                            row[BreakDownDataSet.IdColumn] = detailItem.ID;
-                            breakdowns.Tables[BreakDownDataSet.TableBreakDown].Rows.Add(row);
+                            foreach (BreakDownDetail detailItem in detailList)
+                            {
+                                tmpCustomer = context.Customers.Where(s => s.ID == detailItem.CustomerID).SingleOrDefault();
+                                tmpCharge = context.ChargeHeads.Where(s => s.ID == detailItem.ChargeHeadID).SingleOrDefault();
+                                row = breakdowns.Tables[BreakDownDataSet.TableBreakDown].NewRow();
+                                row[BreakDownDataSet.AmountColumn] = detailItem.Rate;
+                                row[BreakDownDataSet.ChargeHeadIdColumn] = tmpCharge.ID;
+                                row[BreakDownDataSet.ChargeHeadNameColumn] = tmpCharge.Name;
+                                row[BreakDownDataSet.ClientCodeColumn] = tmpClient.Code;
+                                row[BreakDownDataSet.ClientIdColumn] = tmpClient.ID;
+                                row[BreakDownDataSet.ClientNameColumn] = tmpClient.Name;
+                                row[BreakDownDataSet.CustomerCodeColumn] = tmpCustomer.Code;
+                                row[BreakDownDataSet.CustomerIdColumn] = tmpCustomer.ID;
+                                row[BreakDownDataSet.CustomerNameColumn] = tmpCustomer.Name;
+                                row[BreakDownDataSet.InvoiceCycleColumn] = detailItem.InvoiceCycle;
+                                row[BreakDownDataSet.IsActiveColumn] = detailItem.IsActive;
+                                row[BreakDownDataSet.IdColumn] = detailItem.ID;
+                                breakdowns.Tables[BreakDownDataSet.TableBreakDown].Rows.Add(row);
+                            }
                         }
                     }
                 }

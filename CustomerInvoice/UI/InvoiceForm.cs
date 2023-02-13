@@ -44,7 +44,7 @@ namespace CustomerInvoice.UI
 
         private void PopulateClients()
         {
-            ClientDataSet clients = DataLayer.PopulateClients(Program.LoggedInCompanyId, false);
+            ClientDataSet clients = DataLayer.PopulateClients(Program.LoggedInCompanyId, false, false);
             if (clients.Tables[ClientDataSet.TableClient].Rows.Count > 0)
             {
                 foreach (DataRow row in clients.Tables[ClientDataSet.TableClient].Rows)
@@ -59,7 +59,7 @@ namespace CustomerInvoice.UI
             ClientDataSet clients = null;
             if (string.IsNullOrWhiteSpace(this.txtSearch.Text))
             {
-                clients = DataLayer.PopulateClients(Program.LoggedInCompanyId, false);
+                clients = DataLayer.PopulateClients(Program.LoggedInCompanyId, false, false);
             }
             else
             {

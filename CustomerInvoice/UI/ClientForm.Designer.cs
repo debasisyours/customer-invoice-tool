@@ -29,6 +29,9 @@
         private void InitializeComponent()
         {
             this.gbDetails = new System.Windows.Forms.GroupBox();
+            this.dtpRip = new System.Windows.Forms.DateTimePicker();
+            this.chkRip = new System.Windows.Forms.CheckBox();
+            this.label9 = new System.Windows.Forms.Label();
             this.txtNarrative = new System.Windows.Forms.TextBox();
             this.label8 = new System.Windows.Forms.Label();
             this.label7 = new System.Windows.Forms.Label();
@@ -49,9 +52,12 @@
             this.btnCancel = new System.Windows.Forms.Button();
             this.btnPrevious = new System.Windows.Forms.Button();
             this.btnNext = new System.Windows.Forms.Button();
-            this.label9 = new System.Windows.Forms.Label();
-            this.chkRip = new System.Windows.Forms.CheckBox();
-            this.dtpRip = new System.Windows.Forms.DateTimePicker();
+            this.chkNursing = new System.Windows.Forms.CheckBox();
+            this.chkSelfFunding = new System.Windows.Forms.CheckBox();
+            this.chkResidential = new System.Windows.Forms.CheckBox();
+            this.label10 = new System.Windows.Forms.Label();
+            this.label11 = new System.Windows.Forms.Label();
+            this.label12 = new System.Windows.Forms.Label();
             this.gbDetails.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -59,6 +65,12 @@
             // 
             this.gbDetails.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.gbDetails.Controls.Add(this.label12);
+            this.gbDetails.Controls.Add(this.label11);
+            this.gbDetails.Controls.Add(this.label10);
+            this.gbDetails.Controls.Add(this.chkResidential);
+            this.gbDetails.Controls.Add(this.chkSelfFunding);
+            this.gbDetails.Controls.Add(this.chkNursing);
             this.gbDetails.Controls.Add(this.dtpRip);
             this.gbDetails.Controls.Add(this.chkRip);
             this.gbDetails.Controls.Add(this.label9);
@@ -82,10 +94,39 @@
             this.gbDetails.Margin = new System.Windows.Forms.Padding(4);
             this.gbDetails.Name = "gbDetails";
             this.gbDetails.Padding = new System.Windows.Forms.Padding(4);
-            this.gbDetails.Size = new System.Drawing.Size(879, 444);
+            this.gbDetails.Size = new System.Drawing.Size(879, 480);
             this.gbDetails.TabIndex = 0;
             this.gbDetails.TabStop = false;
             this.gbDetails.Text = "Client Information";
+            // 
+            // dtpRip
+            // 
+            this.dtpRip.CustomFormat = "dd/MMM/yyyy";
+            this.dtpRip.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
+            this.dtpRip.Location = new System.Drawing.Point(133, 409);
+            this.dtpRip.Margin = new System.Windows.Forms.Padding(4);
+            this.dtpRip.Name = "dtpRip";
+            this.dtpRip.Size = new System.Drawing.Size(192, 22);
+            this.dtpRip.TabIndex = 18;
+            // 
+            // chkRip
+            // 
+            this.chkRip.AutoSize = true;
+            this.chkRip.Location = new System.Drawing.Point(13, 413);
+            this.chkRip.Name = "chkRip";
+            this.chkRip.Size = new System.Drawing.Size(15, 14);
+            this.chkRip.TabIndex = 17;
+            this.chkRip.UseVisualStyleBackColor = true;
+            // 
+            // label9
+            // 
+            this.label9.AutoSize = true;
+            this.label9.Location = new System.Drawing.Point(32, 413);
+            this.label9.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(38, 16);
+            this.label9.TabIndex = 16;
+            this.label9.Text = "R.I.P.";
             // 
             // txtNarrative
             // 
@@ -104,7 +145,7 @@
             this.label8.Location = new System.Drawing.Point(10, 275);
             this.label8.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(63, 16);
+            this.label8.Size = new System.Drawing.Size(62, 16);
             this.label8.TabIndex = 14;
             this.label8.Text = "Narrative";
             // 
@@ -114,7 +155,7 @@
             this.label7.Location = new System.Drawing.Point(9, 245);
             this.label7.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(99, 16);
+            this.label7.Size = new System.Drawing.Size(98, 16);
             this.label7.TabIndex = 13;
             this.label7.Text = "Their reference";
             // 
@@ -142,7 +183,7 @@
             this.label6.Location = new System.Drawing.Point(9, 209);
             this.label6.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(101, 16);
+            this.label6.Size = new System.Drawing.Size(100, 16);
             this.label6.TabIndex = 10;
             this.label6.Text = "Sage reference";
             // 
@@ -160,7 +201,7 @@
             this.label5.Location = new System.Drawing.Point(8, 174);
             this.label5.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(65, 16);
+            this.label5.Size = new System.Drawing.Size(64, 16);
             this.label5.TabIndex = 8;
             this.label5.Text = "Total rate";
             // 
@@ -180,7 +221,7 @@
             this.label4.Location = new System.Drawing.Point(9, 138);
             this.label4.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(116, 16);
+            this.label4.Size = new System.Drawing.Size(115, 16);
             this.label4.TabIndex = 6;
             this.label4.Text = "Date of admission";
             // 
@@ -200,7 +241,7 @@
             this.label3.Location = new System.Drawing.Point(9, 102);
             this.label3.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(79, 16);
+            this.label3.Size = new System.Drawing.Size(78, 16);
             this.label3.TabIndex = 4;
             this.label3.Text = "Date of birth";
             // 
@@ -221,7 +262,7 @@
             this.label2.Location = new System.Drawing.Point(8, 66);
             this.label2.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(45, 16);
+            this.label2.Size = new System.Drawing.Size(44, 16);
             this.label2.TabIndex = 2;
             this.label2.Text = "Name";
             // 
@@ -240,7 +281,7 @@
             this.label1.Location = new System.Drawing.Point(9, 31);
             this.label1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(41, 16);
+            this.label1.Size = new System.Drawing.Size(40, 16);
             this.label1.TabIndex = 0;
             this.label1.Text = "Code";
             // 
@@ -248,7 +289,7 @@
             // 
             this.btnOK.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.btnOK.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnOK.Location = new System.Drawing.Point(680, 453);
+            this.btnOK.Location = new System.Drawing.Point(680, 489);
             this.btnOK.Margin = new System.Windows.Forms.Padding(4);
             this.btnOK.Name = "btnOK";
             this.btnOK.Size = new System.Drawing.Size(99, 38);
@@ -261,7 +302,7 @@
             this.btnCancel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.btnCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
             this.btnCancel.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnCancel.Location = new System.Drawing.Point(787, 453);
+            this.btnCancel.Location = new System.Drawing.Point(787, 489);
             this.btnCancel.Margin = new System.Windows.Forms.Padding(4);
             this.btnCancel.Name = "btnCancel";
             this.btnCancel.Size = new System.Drawing.Size(99, 38);
@@ -273,7 +314,7 @@
             // 
             this.btnPrevious.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.btnPrevious.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnPrevious.Location = new System.Drawing.Point(7, 453);
+            this.btnPrevious.Location = new System.Drawing.Point(7, 489);
             this.btnPrevious.Margin = new System.Windows.Forms.Padding(4);
             this.btnPrevious.Name = "btnPrevious";
             this.btnPrevious.Size = new System.Drawing.Size(99, 38);
@@ -285,7 +326,7 @@
             // 
             this.btnNext.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.btnNext.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnNext.Location = new System.Drawing.Point(114, 453);
+            this.btnNext.Location = new System.Drawing.Point(114, 489);
             this.btnNext.Margin = new System.Windows.Forms.Padding(4);
             this.btnNext.Name = "btnNext";
             this.btnNext.Size = new System.Drawing.Size(99, 38);
@@ -293,41 +334,69 @@
             this.btnNext.Text = ">>";
             this.btnNext.UseVisualStyleBackColor = true;
             // 
-            // label9
+            // chkNursing
             // 
-            this.label9.AutoSize = true;
-            this.label9.Location = new System.Drawing.Point(32, 413);
-            this.label9.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(39, 16);
-            this.label9.TabIndex = 16;
-            this.label9.Text = "R.I.P.";
+            this.chkNursing.AutoSize = true;
+            this.chkNursing.Location = new System.Drawing.Point(13, 451);
+            this.chkNursing.Name = "chkNursing";
+            this.chkNursing.Size = new System.Drawing.Size(15, 14);
+            this.chkNursing.TabIndex = 19;
+            this.chkNursing.UseVisualStyleBackColor = true;
             // 
-            // chkRip
+            // chkSelfFunding
             // 
-            this.chkRip.AutoSize = true;
-            this.chkRip.Location = new System.Drawing.Point(13, 413);
-            this.chkRip.Name = "chkRip";
-            this.chkRip.Size = new System.Drawing.Size(15, 14);
-            this.chkRip.TabIndex = 17;
-            this.chkRip.UseVisualStyleBackColor = true;
+            this.chkSelfFunding.AutoSize = true;
+            this.chkSelfFunding.Location = new System.Drawing.Point(269, 451);
+            this.chkSelfFunding.Name = "chkSelfFunding";
+            this.chkSelfFunding.Size = new System.Drawing.Size(15, 14);
+            this.chkSelfFunding.TabIndex = 20;
+            this.chkSelfFunding.UseVisualStyleBackColor = true;
             // 
-            // dtpRip
+            // chkResidential
             // 
-            this.dtpRip.CustomFormat = "dd/MMM/yyyy";
-            this.dtpRip.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            this.dtpRip.Location = new System.Drawing.Point(133, 409);
-            this.dtpRip.Margin = new System.Windows.Forms.Padding(4);
-            this.dtpRip.Name = "dtpRip";
-            this.dtpRip.Size = new System.Drawing.Size(192, 22);
-            this.dtpRip.TabIndex = 18;
+            this.chkResidential.AutoSize = true;
+            this.chkResidential.Location = new System.Drawing.Point(525, 451);
+            this.chkResidential.Name = "chkResidential";
+            this.chkResidential.Size = new System.Drawing.Size(15, 14);
+            this.chkResidential.TabIndex = 21;
+            this.chkResidential.UseVisualStyleBackColor = true;
+            // 
+            // label10
+            // 
+            this.label10.AutoSize = true;
+            this.label10.Location = new System.Drawing.Point(32, 451);
+            this.label10.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label10.Name = "label10";
+            this.label10.Size = new System.Drawing.Size(53, 16);
+            this.label10.TabIndex = 22;
+            this.label10.Text = "Nursing";
+            // 
+            // label11
+            // 
+            this.label11.AutoSize = true;
+            this.label11.Location = new System.Drawing.Point(291, 451);
+            this.label11.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label11.Name = "label11";
+            this.label11.Size = new System.Drawing.Size(77, 16);
+            this.label11.TabIndex = 23;
+            this.label11.Text = "Self-funding";
+            // 
+            // label12
+            // 
+            this.label12.AutoSize = true;
+            this.label12.Location = new System.Drawing.Point(547, 451);
+            this.label12.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label12.Name = "label12";
+            this.label12.Size = new System.Drawing.Size(75, 16);
+            this.label12.TabIndex = 24;
+            this.label12.Text = "Residential";
             // 
             // ClientForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.CancelButton = this.btnCancel;
-            this.ClientSize = new System.Drawing.Size(896, 495);
+            this.ClientSize = new System.Drawing.Size(896, 531);
             this.Controls.Add(this.btnNext);
             this.Controls.Add(this.btnPrevious);
             this.Controls.Add(this.btnCancel);
@@ -370,5 +439,11 @@
         private System.Windows.Forms.DateTimePicker dtpRip;
         private System.Windows.Forms.CheckBox chkRip;
         private System.Windows.Forms.Label label9;
+        private System.Windows.Forms.Label label12;
+        private System.Windows.Forms.Label label11;
+        private System.Windows.Forms.Label label10;
+        private System.Windows.Forms.CheckBox chkResidential;
+        private System.Windows.Forms.CheckBox chkSelfFunding;
+        private System.Windows.Forms.CheckBox chkNursing;
     }
 }

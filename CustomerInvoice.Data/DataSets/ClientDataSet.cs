@@ -27,6 +27,9 @@ namespace CustomerInvoice.Data.DataSets
         public const string CustomerCodeColumn = "CustomerCode";
         public const string RipColumn = "RIP";
         public const string CustomerEmailColumn = "CustomerEmail";
+        public const string NursingColumn = "Nursing";
+        public const string SelfFundingColumn = "SelfFunding";
+        public const string ResidentialColumn = "Residential";
 
         #endregion
 
@@ -113,6 +116,24 @@ namespace CustomerInvoice.Data.DataSets
             column.Caption = CustomerEmailColumn;
             column.DataType = typeof(string);
             column.DefaultValue = string.Empty;
+            table.Columns.Add(column);
+
+            column = new DataColumn(NursingColumn);
+            column.Caption = NursingColumn;
+            column.DataType = typeof(bool);
+            column.DefaultValue = false;
+            table.Columns.Add(column);
+
+            column = new DataColumn(SelfFundingColumn);
+            column.Caption = SelfFundingColumn;
+            column.DataType = typeof(bool);
+            column.DefaultValue = false;
+            table.Columns.Add(column);
+
+            column = new DataColumn(ResidentialColumn);
+            column.Caption = ResidentialColumn;
+            column.DataType = typeof(bool);
+            column.DefaultValue = false;
             table.Columns.Add(column);
 
             this.Tables.Add(table);

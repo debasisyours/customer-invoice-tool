@@ -82,6 +82,9 @@ namespace CustomerInvoice.UI
                 this.txtNarrative.Text = this._Client.Narrative;
                 this.dtpRip.Value = this._Client.Rip.HasValue? this._Client.Rip.Value: DateTime.Now;
                 this.chkRip.Checked = this._Client.Rip.HasValue;
+                this.chkNursing.Checked = this._Client.Nursing.HasValue ? this._Client.Nursing.Value : false;
+                this.chkSelfFunding.Checked = this._Client.SelfFunding.HasValue ? this._Client.SelfFunding.Value : false;
+                this.chkResidential.Checked = this._Client.Residential.HasValue ? this._Client.Residential.Value : false;
             }
         }
 
@@ -154,6 +157,9 @@ namespace CustomerInvoice.UI
             this._Client.Narrative = this.txtNarrative.Text;
             this._Client.IsDeleted = this._DeletedMode;
             this._Client.Rip = this.chkRip.Checked ? this.dtpRip.Value : (DateTime?)null;
+            this._Client.Nursing = this.chkNursing.Checked;
+            this._Client.SelfFunding = this.chkSelfFunding.Checked;
+            this._Client.Residential = this.chkResidential.Checked;
             if (DataLayer.SaveClient(this._Client, Program.LoggedInCompanyId))
             {
                 if (!this._InvokedFromPreviousNext)

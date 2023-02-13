@@ -102,11 +102,11 @@ namespace CustomerInvoice.Data
             }
         }
 
-        public static ClientDataSet PopulateClients(int companyId, bool showRip)
+        public static ClientDataSet PopulateClients(int companyId, bool showRip, bool fromClientSearch)
         {
             using (ClientHelper helper = new ClientHelper(GetConnectionString()))
             {
-                return helper.PopulateClientData(companyId, showRip);
+                return helper.PopulateClientData(companyId, showRip, fromClientSearch);
             }
         }
 
@@ -126,11 +126,11 @@ namespace CustomerInvoice.Data
             }
         }
 
-        public static ClientDataSet PopulateClientsWithoutRip(int companyId)
+        public static ClientDataSet PopulateClientsWithoutRip(int companyId, bool fromClientSearch)
         {
             using (ClientHelper helper = new ClientHelper(GetConnectionString()))
             {
-                return helper.PopulateClientData(companyId,false);
+                return helper.PopulateClientData(companyId,false, fromClientSearch);
             }
         }
 

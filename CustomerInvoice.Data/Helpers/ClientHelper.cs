@@ -31,7 +31,7 @@ namespace CustomerInvoice.Data.Helpers
 
         #region Methods
 
-        protected internal ClientDataSet PopulateClientData(int companyId, bool showRip)
+        protected internal ClientDataSet PopulateClientData(int companyId, bool showRip, bool fromClientSearch)
         {
             ClientDataSet clients = new ClientDataSet();
             BreakDown tmpBreakDown = null;
@@ -44,7 +44,19 @@ namespace CustomerInvoice.Data.Helpers
             {
                 using (InvoiceContextDataContext context = new InvoiceContextDataContext(this._ConnectionString))
                 {
-                    List<Client> clientList = context.Clients.Where(s => s.CompanyId==companyId && !s.IsDeleted).ToList();
+                    var clientQuery = context.Clients.Where(s => s.CompanyId==companyId && !s.IsDeleted);
+                    List<Client> clientList = null;
+                    if (fromClientSearch)
+                    {
+                        clientList = clientQuery.Where(s => (!s.Nursing.HasValue || s.Nursing.Value == false)
+                                        && (!s.SelfFunding.HasValue || s.SelfFunding.Value == false)
+                                        && (!s.Residential.HasValue || s.Residential.Value == false)).ToList();
+                    }
+                    else
+                    {
+                        clientList = clientQuery.ToList();
+                    }
+
                     if (clientList != null && clientList.Count > 0)
                     {
                         foreach (Client clientEntry in clientList)
@@ -61,6 +73,9 @@ namespace CustomerInvoice.Data.Helpers
                             row[ClientDataSet.SageReferenceColumn] = clientEntry.SageReference;
                             row[ClientDataSet.TheirReferenceColumn] = clientEntry.TheirReference;
                             if (clientEntry.Rip.HasValue) row[ClientDataSet.RipColumn] = clientEntry.Rip.Value;
+                            if (clientEntry.Nursing.HasValue) row[ClientDataSet.NursingColumn] = clientEntry.Nursing.Value;
+                            if (clientEntry.SelfFunding.HasValue) row[ClientDataSet.SelfFundingColumn] = clientEntry.SelfFunding.Value;
+                            if (clientEntry.Residential.HasValue) row[ClientDataSet.ResidentialColumn] = clientEntry.Residential.Value;
                             tmpBreakDown = context.BreakDowns.Where(s => s.ClientID == clientEntry.ID).SingleOrDefault();
                             if (tmpBreakDown != null)
                             {
@@ -107,6 +122,11 @@ namespace CustomerInvoice.Data.Helpers
                             row[ClientDataSet.DateOfBirthColumn] = s.DateOfBirth;
                             row[ClientDataSet.DateOfAdmissionColumn] = s.DateOfAdmission;
                             row[ClientDataSet.TotalRateColumn] = s.TotalRate;
+                            if (s.Rip.HasValue) row[ClientDataSet.RipColumn] = s.Rip.Value;
+                            if (s.Nursing.HasValue) row[ClientDataSet.NursingColumn] = s.Nursing.Value;
+                            if (s.SelfFunding.HasValue) row[ClientDataSet.SelfFundingColumn] = s.SelfFunding.Value;
+                            if (s.Residential.HasValue) row[ClientDataSet.ResidentialColumn] = s.Residential.Value;
+
                             clients.Tables[ClientDataSet.TableClient].Rows.Add(row);
                         });
                     }
@@ -221,6 +241,9 @@ namespace CustomerInvoice.Data.Helpers
                     currentRecord.Narrative = client.Narrative;
                     currentRecord.IsDeleted = client.IsDeleted;
                     currentRecord.Rip = client.Rip;
+                    currentRecord.Nursing = client.Nursing;
+                    currentRecord.SelfFunding= client.SelfFunding;
+                    currentRecord.Residential = client.Residential;
 
                     if (newRecord)
                     {
@@ -636,6 +659,10 @@ namespace CustomerInvoice.Data.Helpers
                             rowItem[ClientDataSet.SageReferenceColumn]=clientItem.SageReference;
                             rowItem[ClientDataSet.TheirReferenceColumn]=clientItem.TheirReference;
                             rowItem[ClientDataSet.TotalRateColumn]=clientItem.TotalRate;
+                            if (clientItem.Rip.HasValue) rowItem[ClientDataSet.RipColumn] = clientItem.Rip.Value;
+                            if (clientItem.Nursing.HasValue) rowItem[ClientDataSet.NursingColumn] = clientItem.Nursing.Value;
+                            if (clientItem.SelfFunding.HasValue) rowItem[ClientDataSet.SelfFundingColumn] = clientItem.SelfFunding.Value;
+                            if (clientItem.Residential.HasValue) rowItem[ClientDataSet.ResidentialColumn] = clientItem.Residential.Value;
                             clientData.Tables[ClientDataSet.TableClient].Rows.Add(rowItem);
                         }
                     }

@@ -11,7 +11,7 @@ using System.Resources;
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("Aeroplas")]
 [assembly: AssemblyProduct("CustomerInvoice")]
-[assembly: AssemblyCopyright("Copyright © Aeroplas 2022")]
+[assembly: AssemblyCopyright("Copyright © Aeroplas 2023")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
@@ -33,6 +33,6 @@ using System.Resources;
 // You can specify all the values or you can default the Build and Revision Numbers 
 // by using the '*' as shown below:
 // [assembly: AssemblyVersion("1.0.*")]
-[assembly: AssemblyVersion("1.0.024")]
-[assembly: AssemblyFileVersion("1.0.024")]
+[assembly: AssemblyVersion("1.0.025")]
+[assembly: AssemblyFileVersion("1.0.025")]
 [assembly: NeutralResourcesLanguageAttribute("en-GB")]

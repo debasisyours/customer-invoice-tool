@@ -173,7 +173,7 @@ namespace CustomerInvoice.UI
 
         private void PopulateClients()
         {
-            this.cboClient.DataSource = DataLayer.PopulateClients(Program.LoggedInCompanyId, false).Tables[ClientDataSet.TableClient];
+            this.cboClient.DataSource = DataLayer.PopulateClients(Program.LoggedInCompanyId, false, false).Tables[ClientDataSet.TableClient];
             this.cboClient.DisplayMember = ClientDataSet.NameColumn;
             this.cboClient.ValueMember = ClientDataSet.IdColumn;
 

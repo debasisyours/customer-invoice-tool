@@ -670,6 +670,12 @@ namespace CustomerInvoice.Data
 		private bool _IsDeleted;
 
         private DateTime? _Rip;
+
+		private bool? _Nursing;
+
+		private bool? _SelfFunding;
+
+		private bool? _Residential;
 		
 		private EntitySet<BreakDown> _BreakDowns;
 		
@@ -697,6 +703,12 @@ namespace CustomerInvoice.Data
     partial void OnSageReferenceChanged();
     partial void OnRipChanging(DateTime? value);
     partial void OnRipChanged();
+    partial void OnNursingChanging(bool? value);
+    partial void OnNursingChanged();
+    partial void OnSelfFundingChanging(bool? value);
+    partial void OnSelfFundingChanged();
+    partial void OnResidentialChanging(bool? value);
+    partial void OnResidentialChanged();
     partial void OnTheirReferenceChanging(string value);
     partial void OnTheirReferenceChanged();
     partial void OnCompanyIdChanging(int value);
@@ -870,7 +882,67 @@ namespace CustomerInvoice.Data
                     this.SendPropertyChanging();
                     this._Rip = value;
                     this.SendPropertyChanged("Rip");
-                    this.OnSageReferenceChanged();
+                    this.OnRipChanged();
+                }
+            }
+        }
+
+        [global::System.Data.Linq.Mapping.ColumnAttribute(Storage = "_Nursing", DbType = "Bit")]
+        public bool? Nursing
+        {
+            get
+            {
+                return this._Nursing;
+            }
+            set
+            {
+                if ((this._Nursing != value))
+                {
+                    this.OnNursingChanging(value);
+                    this.SendPropertyChanging();
+                    this._Nursing = value;
+                    this.SendPropertyChanged("Nursing");
+                    this.OnNursingChanged();
+                }
+            }
+        }
+
+        [global::System.Data.Linq.Mapping.ColumnAttribute(Storage = "_SelfFunding", DbType = "Bit")]
+        public bool? SelfFunding
+        {
+            get
+            {
+                return this._SelfFunding;
+            }
+            set
+            {
+                if ((this._SelfFunding != value))
+                {
+                    this.OnSelfFundingChanging(value);
+                    this.SendPropertyChanging();
+                    this._SelfFunding = value;
+                    this.SendPropertyChanged("SelfFunding");
+                    this.OnSelfFundingChanged();
+                }
+            }
+        }
+
+        [global::System.Data.Linq.Mapping.ColumnAttribute(Storage = "_Residential", DbType = "Bit")]
+        public bool? Residential
+        {
+            get
+            {
+                return this._Residential;
+            }
+            set
+            {
+                if ((this._Residential != value))
+                {
+                    this.OnResidentialChanging(value);
+                    this.SendPropertyChanging();
+                    this._Residential = value;
+                    this.SendPropertyChanged("Residential");
+                    this.OnResidentialChanged();
                 }
             }
         }

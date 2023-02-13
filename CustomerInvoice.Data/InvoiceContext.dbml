@@ -34,6 +34,9 @@
       <Column Name="Narrative" Type="System.String" CanBeNull="false" />
       <Column Name="IsDeleted" Type="System.Boolean" CanBeNull="false" />
       <Column Name="Rip" Type="System.DateTime" CanBeNull="true" />
+	  <Column Name="Nursing" Type="System.Boolean" CanBeNull="true"/>
+	  <Column Name="SelfFunding" Type="System.Boolean" CanBeNull="true"/>
+	  <Column Name="Residential" Type="System.Boolean" CanBeNull="true"/>
       <Association Name="Client_BreakDown" Member="BreakDowns" ThisKey="ID" OtherKey="ClientID" Type="BreakDown" />
       <Association Name="Client_Invoice" Member="Invoices" ThisKey="ID" OtherKey="ClientID" Type="Invoice" />
       <Association Name="Client_CreditNote" Member="CreditNotes" ThisKey="ID" OtherKey="ClientId" Type="CreditNote" />

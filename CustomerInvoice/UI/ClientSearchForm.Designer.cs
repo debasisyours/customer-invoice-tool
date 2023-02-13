@@ -43,14 +43,17 @@
             this.lblTotalRecords = new System.Windows.Forms.Label();
             this.tabMain = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
-            this.tabPage2 = new System.Windows.Forms.TabPage();
             this.dgvClients = new System.Windows.Forms.DataGridView();
+            this.tabPage2 = new System.Windows.Forms.TabPage();
             this.dgvRip = new System.Windows.Forms.DataGridView();
+            this.chkNursing = new System.Windows.Forms.CheckBox();
+            this.chkResidential = new System.Windows.Forms.CheckBox();
+            this.chkSelfFunding = new System.Windows.Forms.CheckBox();
             this.gbSearch.SuspendLayout();
             this.tabMain.SuspendLayout();
             this.tabPage1.SuspendLayout();
-            this.tabPage2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvClients)).BeginInit();
+            this.tabPage2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvRip)).BeginInit();
             this.SuspendLayout();
             // 
@@ -58,13 +61,16 @@
             // 
             this.gbSearch.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.gbSearch.Controls.Add(this.chkSelfFunding);
+            this.gbSearch.Controls.Add(this.chkResidential);
+            this.gbSearch.Controls.Add(this.chkNursing);
             this.gbSearch.Controls.Add(this.txtSearch);
             this.gbSearch.Controls.Add(this.lblSearch);
             this.gbSearch.Location = new System.Drawing.Point(7, 1);
             this.gbSearch.Margin = new System.Windows.Forms.Padding(4);
             this.gbSearch.Name = "gbSearch";
             this.gbSearch.Padding = new System.Windows.Forms.Padding(4);
-            this.gbSearch.Size = new System.Drawing.Size(1167, 59);
+            this.gbSearch.Size = new System.Drawing.Size(1167, 88);
             this.gbSearch.TabIndex = 0;
             this.gbSearch.TabStop = false;
             // 
@@ -84,7 +90,7 @@
             this.lblSearch.Location = new System.Drawing.Point(9, 25);
             this.lblSearch.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblSearch.Name = "lblSearch";
-            this.lblSearch.Size = new System.Drawing.Size(69, 16);
+            this.lblSearch.Size = new System.Drawing.Size(68, 16);
             this.lblSearch.TabIndex = 0;
             this.lblSearch.Text = "Search on";
             // 
@@ -92,7 +98,7 @@
             // 
             this.btnAdd.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.btnAdd.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnAdd.Location = new System.Drawing.Point(872, 651);
+            this.btnAdd.Location = new System.Drawing.Point(872, 649);
             this.btnAdd.Margin = new System.Windows.Forms.Padding(4);
             this.btnAdd.Name = "btnAdd";
             this.btnAdd.Size = new System.Drawing.Size(69, 38);
@@ -104,7 +110,7 @@
             // 
             this.btnEdit.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.btnEdit.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnEdit.Location = new System.Drawing.Point(949, 651);
+            this.btnEdit.Location = new System.Drawing.Point(949, 649);
             this.btnEdit.Margin = new System.Windows.Forms.Padding(4);
             this.btnEdit.Name = "btnEdit";
             this.btnEdit.Size = new System.Drawing.Size(69, 38);
@@ -116,7 +122,7 @@
             // 
             this.btnDelete.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.btnDelete.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnDelete.Location = new System.Drawing.Point(1027, 651);
+            this.btnDelete.Location = new System.Drawing.Point(1027, 649);
             this.btnDelete.Margin = new System.Windows.Forms.Padding(4);
             this.btnDelete.Name = "btnDelete";
             this.btnDelete.Size = new System.Drawing.Size(69, 38);
@@ -129,7 +135,7 @@
             this.btnExit.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.btnExit.DialogResult = System.Windows.Forms.DialogResult.Cancel;
             this.btnExit.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnExit.Location = new System.Drawing.Point(1104, 651);
+            this.btnExit.Location = new System.Drawing.Point(1104, 649);
             this.btnExit.Margin = new System.Windows.Forms.Padding(4);
             this.btnExit.Name = "btnExit";
             this.btnExit.Size = new System.Drawing.Size(69, 38);
@@ -141,7 +147,7 @@
             // 
             this.btnBreakdown.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.btnBreakdown.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnBreakdown.Location = new System.Drawing.Point(7, 651);
+            this.btnBreakdown.Location = new System.Drawing.Point(7, 649);
             this.btnBreakdown.Margin = new System.Windows.Forms.Padding(4);
             this.btnBreakdown.Name = "btnBreakdown";
             this.btnBreakdown.Size = new System.Drawing.Size(181, 38);
@@ -153,7 +159,7 @@
             // 
             this.btnViewDeleted.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.btnViewDeleted.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnViewDeleted.Location = new System.Drawing.Point(386, 651);
+            this.btnViewDeleted.Location = new System.Drawing.Point(386, 649);
             this.btnViewDeleted.Margin = new System.Windows.Forms.Padding(4);
             this.btnViewDeleted.Name = "btnViewDeleted";
             this.btnViewDeleted.Size = new System.Drawing.Size(156, 38);
@@ -165,9 +171,9 @@
             // 
             this.chkRip.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.chkRip.AutoSize = true;
-            this.chkRip.Location = new System.Drawing.Point(784, 661);
+            this.chkRip.Location = new System.Drawing.Point(785, 659);
             this.chkRip.Name = "chkRip";
-            this.chkRip.Size = new System.Drawing.Size(81, 20);
+            this.chkRip.Size = new System.Drawing.Size(80, 20);
             this.chkRip.TabIndex = 10;
             this.chkRip.Text = "Hide RIP";
             this.chkRip.UseVisualStyleBackColor = true;
@@ -176,7 +182,7 @@
             // 
             this.btnExportExcel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.btnExportExcel.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnExportExcel.Location = new System.Drawing.Point(556, 651);
+            this.btnExportExcel.Location = new System.Drawing.Point(556, 649);
             this.btnExportExcel.Margin = new System.Windows.Forms.Padding(4);
             this.btnExportExcel.Name = "btnExportExcel";
             this.btnExportExcel.Size = new System.Drawing.Size(106, 38);
@@ -188,7 +194,7 @@
             // 
             this.btnSendLetter.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.btnSendLetter.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnSendLetter.Location = new System.Drawing.Point(670, 651);
+            this.btnSendLetter.Location = new System.Drawing.Point(670, 649);
             this.btnSendLetter.Margin = new System.Windows.Forms.Padding(4);
             this.btnSendLetter.Name = "btnSendLetter";
             this.btnSendLetter.Size = new System.Drawing.Size(106, 38);
@@ -202,9 +208,9 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.lblTotalRecords.AutoSize = true;
             this.lblTotalRecords.ForeColor = System.Drawing.Color.Maroon;
-            this.lblTotalRecords.Location = new System.Drawing.Point(195, 672);
+            this.lblTotalRecords.Location = new System.Drawing.Point(195, 670);
             this.lblTotalRecords.Name = "lblTotalRecords";
-            this.lblTotalRecords.Size = new System.Drawing.Size(85, 16);
+            this.lblTotalRecords.Size = new System.Drawing.Size(84, 16);
             this.lblTotalRecords.TabIndex = 13;
             this.lblTotalRecords.Text = "Total Clients:";
             // 
@@ -215,10 +221,10 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.tabMain.Controls.Add(this.tabPage1);
             this.tabMain.Controls.Add(this.tabPage2);
-            this.tabMain.Location = new System.Drawing.Point(7, 67);
+            this.tabMain.Location = new System.Drawing.Point(7, 96);
             this.tabMain.Name = "tabMain";
             this.tabMain.SelectedIndex = 0;
-            this.tabMain.Size = new System.Drawing.Size(1166, 577);
+            this.tabMain.Size = new System.Drawing.Size(1166, 546);
             this.tabMain.TabIndex = 14;
             // 
             // tabPage1
@@ -227,10 +233,20 @@
             this.tabPage1.Location = new System.Drawing.Point(4, 25);
             this.tabPage1.Name = "tabPage1";
             this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage1.Size = new System.Drawing.Size(1158, 548);
+            this.tabPage1.Size = new System.Drawing.Size(1158, 517);
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "Active";
             this.tabPage1.UseVisualStyleBackColor = true;
+            // 
+            // dgvClients
+            // 
+            this.dgvClients.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvClients.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.dgvClients.Location = new System.Drawing.Point(3, 3);
+            this.dgvClients.Margin = new System.Windows.Forms.Padding(4);
+            this.dgvClients.Name = "dgvClients";
+            this.dgvClients.Size = new System.Drawing.Size(1152, 511);
+            this.dgvClients.TabIndex = 2;
             // 
             // tabPage2
             // 
@@ -243,16 +259,6 @@
             this.tabPage2.Text = "Deleted (RIP)";
             this.tabPage2.UseVisualStyleBackColor = true;
             // 
-            // dgvClients
-            // 
-            this.dgvClients.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgvClients.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.dgvClients.Location = new System.Drawing.Point(3, 3);
-            this.dgvClients.Margin = new System.Windows.Forms.Padding(4);
-            this.dgvClients.Name = "dgvClients";
-            this.dgvClients.Size = new System.Drawing.Size(1152, 542);
-            this.dgvClients.TabIndex = 2;
-            // 
             // dgvRip
             // 
             this.dgvRip.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
@@ -263,12 +269,42 @@
             this.dgvRip.Size = new System.Drawing.Size(1152, 542);
             this.dgvRip.TabIndex = 3;
             // 
+            // chkNursing
+            // 
+            this.chkNursing.AutoSize = true;
+            this.chkNursing.Location = new System.Drawing.Point(663, 53);
+            this.chkNursing.Name = "chkNursing";
+            this.chkNursing.Size = new System.Drawing.Size(72, 20);
+            this.chkNursing.TabIndex = 2;
+            this.chkNursing.Text = "Nursing";
+            this.chkNursing.UseVisualStyleBackColor = true;
+            // 
+            // chkResidential
+            // 
+            this.chkResidential.AutoSize = true;
+            this.chkResidential.Location = new System.Drawing.Point(1067, 53);
+            this.chkResidential.Name = "chkResidential";
+            this.chkResidential.Size = new System.Drawing.Size(94, 20);
+            this.chkResidential.TabIndex = 3;
+            this.chkResidential.Text = "Residential";
+            this.chkResidential.UseVisualStyleBackColor = true;
+            // 
+            // chkSelfFunding
+            // 
+            this.chkSelfFunding.AutoSize = true;
+            this.chkSelfFunding.Location = new System.Drawing.Point(853, 53);
+            this.chkSelfFunding.Name = "chkSelfFunding";
+            this.chkSelfFunding.Size = new System.Drawing.Size(96, 20);
+            this.chkSelfFunding.TabIndex = 4;
+            this.chkSelfFunding.Text = "Self-funding";
+            this.chkSelfFunding.UseVisualStyleBackColor = true;
+            // 
             // ClientSearchForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.CancelButton = this.btnExit;
-            this.ClientSize = new System.Drawing.Size(1181, 697);
+            this.ClientSize = new System.Drawing.Size(1181, 695);
             this.Controls.Add(this.tabMain);
             this.Controls.Add(this.lblTotalRecords);
             this.Controls.Add(this.btnSendLetter);
@@ -290,8 +326,8 @@
             this.gbSearch.PerformLayout();
             this.tabMain.ResumeLayout(false);
             this.tabPage1.ResumeLayout(false);
-            this.tabPage2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dgvClients)).EndInit();
+            this.tabPage2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dgvRip)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -318,5 +354,8 @@
         private System.Windows.Forms.DataGridView dgvClients;
         private System.Windows.Forms.TabPage tabPage2;
         private System.Windows.Forms.DataGridView dgvRip;
+        private System.Windows.Forms.CheckBox chkSelfFunding;
+        private System.Windows.Forms.CheckBox chkResidential;
+        private System.Windows.Forms.CheckBox chkNursing;
     }
 }

@@ -37,6 +37,9 @@ namespace CustomerInvoice.UI
             this.InitializeControls();
             this.AssignEventHandlers();
             this.chkRip.Checked = true;
+            this.chkResidential.Checked = false;
+            this.chkNursing.Checked = false;
+            this.chkSelfFunding.Checked = false;
         }
 
         protected override void OnResize(EventArgs e)
@@ -67,6 +70,9 @@ namespace CustomerInvoice.UI
             this.chkRip.CheckedChanged += new EventHandler(OnShowHideRip);
             this.btnExportExcel.Click += new EventHandler(OnGenerateExcelExport);
             this.btnSendLetter.Click += new EventHandler(OnSendLetter);
+            this.chkNursing.CheckedChanged += new EventHandler(OnSearchChanged);
+            this.chkResidential.CheckedChanged += new EventHandler(OnSearchChanged);
+            this.chkSelfFunding.CheckedChanged += new EventHandler(OnSearchChanged);
         }
 
         private void OnGenerateExcelExport(object sender, EventArgs e)
@@ -134,7 +140,7 @@ namespace CustomerInvoice.UI
         {
             this.FormatGrid();
             this.FormatRipGrid();
-            this._ClientData = DataLayer.PopulateClients(Program.LoggedInCompanyId, true);
+            this._ClientData = DataLayer.PopulateClients(Program.LoggedInCompanyId, true, false);
             this.dgvClients.DataSource = this._ClientData.Tables[ClientDataSet.TableClient];
             this.lblTotalRecords.Text = string.Format(CultureInfo.CurrentCulture, "Total Clients: {0}", this._ClientData.Tables[ClientDataSet.TableClient].Rows.Count);
 
@@ -151,13 +157,13 @@ namespace CustomerInvoice.UI
         {
             if (this.chkRip.Checked)
             {
-                this._ClientData = DataLayer.PopulateClientsWithoutRip(Program.LoggedInCompanyId);
+                this._ClientData = DataLayer.PopulateClientsWithoutRip(Program.LoggedInCompanyId, false);
                 this.dgvClients.DataSource = this._ClientData.Tables[ClientDataSet.TableClient];
                 this.lblTotalRecords.Text = string.Format(CultureInfo.CurrentCulture, "Total Clients: {0}", this._ClientData.Tables[ClientDataSet.TableClient].Rows.Count);
             }
             else
             {
-                this._ClientData = DataLayer.PopulateClients(Program.LoggedInCompanyId, true);
+                this._ClientData = DataLayer.PopulateClients(Program.LoggedInCompanyId, true, false);
                 this.dgvClients.DataSource = this._ClientData.Tables[ClientDataSet.TableClient];
                 this.lblTotalRecords.Text = string.Format(CultureInfo.CurrentCulture, "Total Clients: {0}", this._ClientData.Tables[ClientDataSet.TableClient].Rows.Count);
             }
@@ -474,8 +480,36 @@ namespace CustomerInvoice.UI
             DataRow[] selectedRows = null;
             ClientDataSet tmpData = new ClientDataSet();
             string filterCondition = string.Empty;
-            
-            if (string.Compare(this.lblSearch.Text, "Search on", false) == 0) return;
+            string chargeTypeFilter = string.Empty;
+
+            if (this.chkNursing.Checked)
+            {
+                chargeTypeFilter = $"({ClientDataSet.NursingColumn} = true)";
+            }
+            else
+            {
+                chargeTypeFilter = $"({ClientDataSet.NursingColumn} = false)";
+            }
+
+            if (this.chkSelfFunding.Checked)
+            {
+                chargeTypeFilter = $"{chargeTypeFilter} AND ({ClientDataSet.SelfFundingColumn} = true)";
+            }
+            else
+            {
+                chargeTypeFilter = $"{chargeTypeFilter} AND ({ClientDataSet.SelfFundingColumn} = false)";
+            }
+
+            if (this.chkResidential.Checked)
+            {
+                chargeTypeFilter = $"{chargeTypeFilter} AND ({ClientDataSet.ResidentialColumn} = true)";
+            }
+            else
+            {
+                chargeTypeFilter = $"{chargeTypeFilter} AND ({ClientDataSet.ResidentialColumn} = false)";
+            }
+
+            //if (string.Compare(this.lblSearch.Text, "Search on", false) == 0) return;
 
             if (this.tabMain.SelectedIndex == 0)
             {
@@ -484,7 +518,7 @@ namespace CustomerInvoice.UI
                     case "Code":
                         {
                             filterCondition = string.Format(CultureInfo.CurrentCulture, "{0} LIKE '%{1}%'", ClientDataSet.CodeColumn, this.txtSearch.Text);
-                            selectedRows = this._ClientData.Tables[ClientDataSet.TableClient].Select(filterCondition);
+                            selectedRows = this._ClientData.Tables[ClientDataSet.TableClient].Select($"{filterCondition} AND {chargeTypeFilter}");
                             foreach (DataRow rowItem in selectedRows)
                             {
                                 tmpData.Tables[ClientDataSet.TableClient].ImportRow(rowItem);
@@ -495,7 +529,7 @@ namespace CustomerInvoice.UI
                     case "Name":
                         {
                             filterCondition = string.Format(CultureInfo.CurrentCulture, "{0} LIKE '%{1}%'", ClientDataSet.NameColumn, this.txtSearch.Text);
-                            selectedRows = this._ClientData.Tables[ClientDataSet.TableClient].Select(filterCondition);
+                            selectedRows = this._ClientData.Tables[ClientDataSet.TableClient].Select($"{filterCondition} AND {chargeTypeFilter}");
                             foreach (DataRow rowItem in selectedRows)
                             {
                                 tmpData.Tables[ClientDataSet.TableClient].ImportRow(rowItem);
@@ -506,7 +540,7 @@ namespace CustomerInvoice.UI
                     case "Sage Ref":
                         {
                             filterCondition = string.Format(CultureInfo.CurrentCulture, "{0} LIKE '%{1}%'", ClientDataSet.SageReferenceColumn, this.txtSearch.Text);
-                            selectedRows = this._ClientData.Tables[ClientDataSet.TableClient].Select(filterCondition);
+                            selectedRows = this._ClientData.Tables[ClientDataSet.TableClient].Select($"{filterCondition} AND {chargeTypeFilter}");
                             foreach (DataRow rowItem in selectedRows)
                             {
                                 tmpData.Tables[ClientDataSet.TableClient].ImportRow(rowItem);
@@ -517,7 +551,7 @@ namespace CustomerInvoice.UI
                     case "Customer(s)":
                         {
                             filterCondition = string.Format(CultureInfo.CurrentCulture, "{0} LIKE '%{1}%'", ClientDataSet.CustomerCodeColumn, this.txtSearch.Text);
-                            selectedRows = this._ClientData.Tables[ClientDataSet.TableClient].Select(filterCondition);
+                            selectedRows = this._ClientData.Tables[ClientDataSet.TableClient].Select($"{filterCondition} AND {chargeTypeFilter}");
                             foreach (DataRow rowItem in selectedRows)
                             {
                                 tmpData.Tables[ClientDataSet.TableClient].ImportRow(rowItem);
@@ -528,7 +562,17 @@ namespace CustomerInvoice.UI
                     case "Customer Email(s)":
                         {
                             filterCondition = string.Format(CultureInfo.CurrentCulture, "{0} LIKE '%{1}%'", ClientDataSet.CustomerEmailColumn, this.txtSearch.Text);
-                            selectedRows = this._ClientData.Tables[ClientDataSet.TableClient].Select(filterCondition);
+                            selectedRows = this._ClientData.Tables[ClientDataSet.TableClient].Select($"{filterCondition} AND {chargeTypeFilter}");
+                            foreach (DataRow rowItem in selectedRows)
+                            {
+                                tmpData.Tables[ClientDataSet.TableClient].ImportRow(rowItem);
+                            }
+                            this.dgvClients.DataSource = tmpData.Tables[ClientDataSet.TableClient];
+                            break;
+                        }
+                    default:
+                        {
+                            selectedRows = this._ClientData.Tables[ClientDataSet.TableClient].Select(chargeTypeFilter);
                             foreach (DataRow rowItem in selectedRows)
                             {
                                 tmpData.Tables[ClientDataSet.TableClient].ImportRow(rowItem);
@@ -545,7 +589,7 @@ namespace CustomerInvoice.UI
                     case "Code":
                         {
                             filterCondition = string.Format(CultureInfo.CurrentCulture, "{0} LIKE '%{1}%'", ClientDataSet.CodeColumn, this.txtSearch.Text);
-                            selectedRows = this._DeletedClientData.Tables[ClientDataSet.TableClient].Select(filterCondition);
+                            selectedRows = this._DeletedClientData.Tables[ClientDataSet.TableClient].Select($"{filterCondition} AND {chargeTypeFilter}");
                             foreach (DataRow rowItem in selectedRows)
                             {
                                 tmpData.Tables[ClientDataSet.TableClient].ImportRow(rowItem);
@@ -556,7 +600,7 @@ namespace CustomerInvoice.UI
                     case "Name":
                         {
                             filterCondition = string.Format(CultureInfo.CurrentCulture, "{0} LIKE '%{1}%'", ClientDataSet.NameColumn, this.txtSearch.Text);
-                            selectedRows = this._DeletedClientData.Tables[ClientDataSet.TableClient].Select(filterCondition);
+                            selectedRows = this._DeletedClientData.Tables[ClientDataSet.TableClient].Select($"{filterCondition} AND {chargeTypeFilter}");
                             foreach (DataRow rowItem in selectedRows)
                             {
                                 tmpData.Tables[ClientDataSet.TableClient].ImportRow(rowItem);
@@ -567,7 +611,17 @@ namespace CustomerInvoice.UI
                     case "Sage Ref":
                         {
                             filterCondition = string.Format(CultureInfo.CurrentCulture, "{0} LIKE '%{1}%'", ClientDataSet.SageReferenceColumn, this.txtSearch.Text);
-                            selectedRows = this._DeletedClientData.Tables[ClientDataSet.TableClient].Select(filterCondition);
+                            selectedRows = this._DeletedClientData.Tables[ClientDataSet.TableClient].Select($"{filterCondition} AND {chargeTypeFilter}");
+                            foreach (DataRow rowItem in selectedRows)
+                            {
+                                tmpData.Tables[ClientDataSet.TableClient].ImportRow(rowItem);
+                            }
+                            this.dgvRip.DataSource = tmpData.Tables[ClientDataSet.TableClient];
+                            break;
+                        }
+                    default:
+                        {
+                            selectedRows = this._DeletedClientData.Tables[ClientDataSet.TableClient].Select(chargeTypeFilter);
                             foreach (DataRow rowItem in selectedRows)
                             {
                                 tmpData.Tables[ClientDataSet.TableClient].ImportRow(rowItem);

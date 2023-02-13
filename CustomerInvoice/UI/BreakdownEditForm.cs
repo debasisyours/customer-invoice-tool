@@ -201,7 +201,7 @@ namespace CustomerInvoice.UI
 
         private void PopulateDropdowns()
         {
-            this.cboClient.DataSource = DataLayer.PopulateClients(Program.LoggedInCompanyId, true).Tables[ClientDataSet.TableClient];
+            this.cboClient.DataSource = DataLayer.PopulateClients(Program.LoggedInCompanyId, true, false).Tables[ClientDataSet.TableClient];
             this.cboClient.DisplayMember = ClientDataSet.NameColumn;
             this.cboClient.ValueMember = ClientDataSet.IdColumn;
 
@@ -356,7 +356,7 @@ namespace CustomerInvoice.UI
             this.dgvEntry.Columns[BreakDownDataSet.CustomerIdColumn].Visible = false;
             this.dgvEntry.Columns[BreakDownDataSet.ChargeHeadIdColumn].Visible = false;
 
-            ClientDataSet clients = DataLayer.PopulateClients(Program.LoggedInCompanyId, false);
+            ClientDataSet clients = DataLayer.PopulateClients(Program.LoggedInCompanyId, false, false);
             this.lblTotalRecords.Text = string.Format(CultureInfo.CurrentCulture, "Total Clients: {0}", clients.Tables[ClientDataSet.TableClient].Rows.Count);
 
             this.UpdateTotal();

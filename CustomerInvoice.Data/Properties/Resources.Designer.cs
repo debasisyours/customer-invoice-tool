@@ -19,7 +19,7 @@ namespace CustomerInvoice.Data.Properties {
     // class via a tool like ResGen or Visual Studio.
     // To add or remove a member, edit your .ResX file then rerun ResGen
     // with the /str option, or rebuild your VS project.
-    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "16.0.0.0")]
+    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "17.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
     internal class Resources {
@@ -102,9 +102,9 @@ namespace CustomerInvoice.Data.Properties {
         ///	SET NOCOUNT ON;
         ///
         ///	SELECT
-        ///		 C.Id, C.Name, C.Code
+        ///		 C.Id
         ///	FROM dbo.BreakDown B WITH(NOLOCK)
-        ///	JOIN d [rest of string was truncated]&quot;;.
+        ///	JOIN dbo.BreakDownDeta [rest of string was truncated]&quot;;.
         /// </summary>
         internal static string usp_CheckClientRip {
             get {
@@ -113,10 +113,7 @@ namespace CustomerInvoice.Data.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to DROP PROCEDURE IF EXISTS usp_Invoice_History
-        ///GO
-        ///
-        ///CREATE PROCEDURE usp_Invoice_History
+        ///   Looks up a localized string similar to CREATE PROCEDURE usp_Invoice_History
         ///	@CompanyId	INT
         ///AS
         ///BEGIN
@@ -135,7 +132,9 @@ namespace CustomerInvoice.Data.Properties {
         ///			[Days]			INT,
         ///			[SubTotal]		MONEY,
         ///			[ExtraHead]		VARCHAR(100),
-        ///			[Ex [rest of string was truncated]&quot;;.
+        ///			[ExtraAmount]	MONEY,
+        ///			[LessHead]		VARCHAR(100),
+        ///			 [rest of string was truncated]&quot;;.
         /// </summary>
         internal static string usp_Invoice_History {
             get {

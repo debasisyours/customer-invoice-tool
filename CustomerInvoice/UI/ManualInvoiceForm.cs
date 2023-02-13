@@ -148,7 +148,7 @@ namespace CustomerInvoice.UI
         {
             this.txtInvoiceNumber.Text = DataLayer.GenerateInvoiceNumber(Program.LoggedInCompanyId);
 
-            ClientDataSet clientList = DataLayer.PopulateClients(Program.LoggedInCompanyId, false);
+            ClientDataSet clientList = DataLayer.PopulateClients(Program.LoggedInCompanyId, false, false);
             AutoCompleteStringCollection clientSuggest = new AutoCompleteStringCollection();
             foreach (DataRow rowItem in clientList.Tables[ClientDataSet.TableClient].Rows)
             {
